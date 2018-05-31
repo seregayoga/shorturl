@@ -1,0 +1,17 @@
+version: '3'
+services:
+  shorturl:
+    build: .
+    ports:
+    - "8080:8080"
+    links:
+    - redis
+    environment:
+    - SHORTURL_REDISADDR=redis:6379
+    - SHORTURL_REDISPASSWORD=
+    - SHORTURL_REDISDB=0
+    - SHORTURL_LISTENADDR=:8080
+    - SHORTURL_REDIRECTHOST=http://localhost:8080/
+    - SHORTURL_PATHSIZE=5
+  redis:
+    image: redis:4.0.9-alpine
